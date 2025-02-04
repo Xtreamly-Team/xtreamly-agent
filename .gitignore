@@ -49,3 +49,8 @@ deployments/localhost
 
 # other
 temp
+
+# gaia
+gaia/model
+gaia/node
+nohup.out
