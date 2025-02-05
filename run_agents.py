@@ -19,6 +19,7 @@ from typing import Annotated, Literal
 
 # Suppress specific warnings
 warnings.simplefilter("ignore", UserWarning)
+warnings.filterwarnings("ignore")
 
 from google.cloud import storage, bigquery  # , pubsub_v1
 from google.oauth2 import service_account
@@ -86,7 +87,6 @@ def agents_newly_active() -> str: return top_agents_newly_active(df)
 
 # =============================================================================
 # Dynamic tools registry
-
 autogen.register_function(xtreamly_volatility, caller=agent_researcher, executor=executor,
     name="xtreamly_volatility",
     description="""Checks current market volatility status"""
@@ -151,7 +151,7 @@ agent_researcher.register_nested_chats(
         ],)  
 
 def _conversation(msg):
-    chat_results = human_proxy.initiate_chats([{
+    return human_proxy.initiate_chats([{
                 "recipient": group_chat_manager,
                 "message": f""" 
                 {msg}
@@ -161,4 +161,4 @@ def _conversation(msg):
                 "summary_method": "reflection_with_llm",
             }])
     
-_conversation("Identify most popular tokens right now")
+_conversation("Find me best agents to invest now")

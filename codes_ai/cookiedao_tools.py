@@ -28,7 +28,7 @@ def _msg(out, metric, var):
         for i,r in out.iterrows():
             msg += f"{i+1}. {r['agentName']} ({np.round(r[var],4)}),\n\t"
     else:
-        msg += " - None.\n\t"
+        msg += " - None (try different tool).\n\t"
     return msg[:-3]
 
 def top_agents_significant(df) -> str:

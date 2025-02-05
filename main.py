@@ -9,6 +9,7 @@ warnings.filterwarnings("ignore")
 # from auth import _current_user
 
 from run_cookiedao import load_data_cookiedao
+from run_agents import _conversation
 
 app = FastAPI(
     title="AI Cookie DAO",
@@ -48,6 +49,12 @@ def home(): return 'Cookie DAO hackaton'
 def load():  
     load_data_cookiedao()
     return "Loaded Cookie DAO data into BQ"
+
+@app.post("/Conversation")
+def talk(
+    msg: str = Query("Find me most interesting agents to invest in"),
+    ):  
+    return _conversation(msg)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
