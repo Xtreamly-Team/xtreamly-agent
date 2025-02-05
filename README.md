@@ -103,3 +103,4 @@ Your Anaconda environment is now set up, and you can proceed to run or develop t
 ## Knowledge
 
 - https://www.youtube.com/watch?v=dW-qr_ntOgc&t=173s
+- https://fastapi.tiangolo.com/advanced/websockets/
