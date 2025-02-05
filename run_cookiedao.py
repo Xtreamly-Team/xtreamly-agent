@@ -25,8 +25,6 @@ from google.cloud import storage, bigquery  # , pubsub_v1
 from google.oauth2 import service_account
 from codes_ai.cookiedao_load import *
 
-auth_file = os.path.join('..', 'gcp', f'xtreamly-ai.json')
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = auth_file
 auth_file = os.path.join(f'xtreamly-ai.json')
 credentials = None
 if os.path.isfile(auth_file):
