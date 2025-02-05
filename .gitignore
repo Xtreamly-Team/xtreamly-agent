@@ -168,8 +168,8 @@ __pycache__/
 review/logs.db
 gcp-account.json
 gcp-gmaps.json
-gcp-mail.json
 firebase-admin.json
+xtreamly-ai.json
 
 #garbage
 run_ai.py

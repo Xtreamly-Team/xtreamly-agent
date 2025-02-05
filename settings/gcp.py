@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 name_project = 'xtreamly-ai'
 name_bucket = 'reports'
 name_database = 'startups'
-auth_file = os.path.join(f'gcp-account.json')
+auth_file = os.path.join(f'xtreamly-ai.json')
 credentials = None
 if os.path.isfile(auth_file):
     credentials = service_account.Credentials.from_service_account_file(

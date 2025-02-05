@@ -45,11 +45,10 @@ app.add_middleware(
 def home(): return 'Cookie DAO hackaton'
 
 @app.post("/load_data")
-def load(): 
+def load():  
     load_data_cookiedao()
     return "Loaded Cookie DAO data into BQ"
 
-            
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     run(app, host="0.0.0.0", port=port)
