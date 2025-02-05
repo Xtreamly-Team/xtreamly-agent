@@ -8,6 +8,8 @@ import warnings
 warnings.filterwarnings("ignore")
 # from auth import _current_user
 
+from run_cookiedao import load_data_cookiedao
+
 app = FastAPI(
     title="AI Cookie DAO",
     description='Agentic app.',
@@ -41,6 +43,12 @@ app.add_middleware(
 
 @app.get("/")
 def home(): return 'Cookie DAO hackaton'
+
+@app.post("/load_data")
+def load(): 
+    load_data_cookiedao()
+    return "Loaded Cookie DAO data into BQ"
+
             
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
