@@ -70,7 +70,6 @@ def agent_record(a):
     }   
 
 def get_data_cookiedao():
-    _time = datetime.utcnow().replace(tzinfo=pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
 
     Agents = []
     page = 1
@@ -100,14 +99,12 @@ def get_data_cookiedao():
             Contracts += [df_c]
     df_contracts = pd.concat(Contracts)
     
-    df_agents['_time'] = _time
-    df_tweets['_time'] = _time
-    df_contracts['_time'] = _time    
+
     return df_agents, df_tweets, df_contracts
 
 
-def load_data_cookiedao():
-    df_agents, df_tweets, df_contracts = get_data_cookiedao()
+# def load_data_cookiedao():
+#     df_agents, df_tweets, df_contracts = get_data_cookiedao()
 
 
 

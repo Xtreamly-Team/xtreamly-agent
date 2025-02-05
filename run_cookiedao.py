@@ -21,10 +21,9 @@ from datetime import datetime, timedelta
 from pprint import pprint
 from dotenv import load_dotenv
 
-
 from google.cloud import storage, bigquery  # , pubsub_v1
 from google.oauth2 import service_account
-from codes_ai.cookiedao import *
+from codes_ai.cookiedao_load import *
 
 auth_file = os.path.join('..', 'gcp', f'xtreamly-ai.json')
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = auth_file
@@ -45,7 +44,12 @@ def _convert(df):
     return df
 
 def load_data_cookiedao():
+    _time = datetime.utcnow().replace(tzinfo=pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
+
     df_agents, df_tweets, df_contracts = get_data_cookiedao()
+    df_agents['_time'] = _time
+    df_tweets['_time'] = _time
+    df_contracts['_time'] = _time    
 
     tbl_agents = f"xtreamly-ai.xtreamly_cookiedao.agents"
     tbl_tweets = f"xtreamly-ai.xtreamly_cookiedao.tweets"
@@ -54,5 +58,3 @@ def load_data_cookiedao():
     job = client_bq.load_table_from_dataframe(_convert(df_agents), tbl_agents)
     job = client_bq.load_table_from_dataframe(_convert(df_tweets), tbl_tweets)
     job = client_bq.load_table_from_dataframe(_convert(df_contracts), tbl_contracts)
-
-    # print("df_agents ",df_agents.shape[0])
