@@ -76,8 +76,11 @@ df = df[df['agentName'].isin(df_arbitrum['agentName'])]
 # Tools - Cookie DAO
 def _msg(out, metric, var):
     msg = f"Top {metric} agents (by {var}):\n\t"
-    for i,r in out.iterrows():
-        msg += f"{i+1}. {r['agentName']} ({np.round(r[var],4)}),\n\t"
+    if out.shape[0]:
+        for i,r in out.iterrows():
+            msg += f"{i+1}. {r['agentName']} ({np.round(r[var],4)}),\n\t"
+    else:
+        msg += " - None.\n\t"
     return msg[:-3]
 
 def top10_agents_significant(df):
