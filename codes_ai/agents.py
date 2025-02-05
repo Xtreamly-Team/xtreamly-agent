@@ -8,20 +8,20 @@ llm_config={
     "timeout": 120,
     }
 
-def get_agent_planner():
-    return autogen.ConversableAgent(
+agent_planner = autogen.ConversableAgent(
         name="Planner",
         system_message = """
-        # You are the Planner monitoring the progress of the task to complete it.
+        # You are the Planner to progress of the task from human and discuss only about agents to invest in.
 
         ### Responsibilities
-        **Plan Development and Execution:**
-        - **Create Plan:** Outline specific steps needed to complete the research.
-        - **Monitor Progress:** Track the progress of each step and verify completion or if additional steps are required.
-        - **Make Decisions:** Make high-level decisions based on info from agents.
-        **Error Handling:**
-        - **Handle Errors:** Develop a new plan or adjust actions if errors occur or if responses are incorrect.
-        - **Guide Adjustments:** Direct agents on necessary changes to achieve task goals.
+        **1. Review Human Needs:**
+        - Identify with human user his needs** Outline specific steps needed to complete the research.
+        - Query Researcher for information.
+        **2. Propose to Human to invest with the rationale:**
+        - Propose potenatial investment with [agentName, Volume]
+        - Collect Human input to apply investment to 
+        **Execute Investment:**
+        - Send request to Researcher to apply investment
 
         ### Reply 'TERMINATE' when the whole task is completed.
         """,
@@ -31,15 +31,16 @@ def get_agent_planner():
         human_input_mode="NEVER",
     )
 
-def get_agent_researcher():
-    return autogen.ConversableAgent(
+agent_researcher = autogen.ConversableAgent(
         name=f"Researcher",
         system_message="""
-        # You are the Researcher collecting information.
+        # You are the Researcher collecting information on Crypto tokens from Cookie DAO.
+        Cookie DAO is crypto’s first AI agents index and a modular data layer for the agentic economy. 
 
         ### Responsibilities
         - **Provide Tools Output:** Return results from executed tools to other agents.
         - **Deep dive:** Adjust research to gather missing information as needed.
+        - **Invest:** Invest into agents.
 
         ### Reply 'TERMINATE' when the whole task is completed.
         """,
@@ -49,11 +50,16 @@ def get_agent_researcher():
         human_input_mode="NEVER",
         )
 
-def get_executor():
-    return autogen.ConversableAgent(
+executor = autogen.ConversableAgent(
         name=f"tool_executor",
         llm_config=False,
         is_termination_msg=lambda msg: msg.get("content") is not None and "TERMINATE" in msg["content"],
         default_auto_reply="TERMINATE",
         human_input_mode="NEVER",
-    )    
+    )
+
+human_proxy = autogen.ConversableAgent(
+    "human_proxy",
+    llm_config=False,  # no LLM used for human proxy
+    human_input_mode="ALWAYS",  # always ask for human input
+)

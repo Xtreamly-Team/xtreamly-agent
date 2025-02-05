@@ -74,12 +74,12 @@ def get_data_cookiedao():
     Agents = []
     page = 1
     done = False
-    # while not done:
-    agents, done = get_agents(page)
-    Agents += agents
-    # print("Ingested page", page)    
-    page += 1
-    time.sleep(.5)
+    while not done:
+        agents, done = get_agents(page)
+        Agents += agents
+        # print("Ingested page", page)    
+        page += 1
+        time.sleep(.5)
     
     df_agents = pd.DataFrame([agent_record(a) for a in Agents])
     

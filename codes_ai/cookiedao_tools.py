@@ -31,7 +31,7 @@ def _msg(out, metric, var):
         msg += " - None.\n\t"
     return msg[:-3]
 
-def top10_agents_significant(df):
+def top_agents_significant(df) -> str:
     out = df[
         (df["mindshareDeltaPercent"].abs() >= 10) |
         (df["marketCapDeltaPercent"].abs() >= 10) |
@@ -40,19 +40,19 @@ def top10_agents_significant(df):
     ].sort_values(by='followersCount', ascending=False).head(10).reset_index(drop=True)
     return _msg(out, "significant", "followersCount")
 
-def top10_agents_popular(df):
+def top_agents_popular(df) -> str:
     out = df[
         (df["followersCount"] >= 500) & 
         (df["averageEngagementsCountDeltaPercent"] >= 10)
     ].sort_values(by='followersCount', ascending=False).head(10).reset_index(drop=True)
     return _msg(out, "popular", "followersCount")
 
-def top10_agents_performing(df):
+def top_agents_performing(df) -> str:
     out = df.sort_values(by=["marketCap", "mindshare", "followersCount"], 
                          ascending=[False, False, False]).head(10).reset_index(drop=True)
     return _msg(out, "popular", "marketCap")
 
-def top10_agents_volatile(df):
+def top_agents_volatile(df) -> str:
     out = df.assign(volatility_score=(
         df["priceDeltaPercent"].abs() +
         df["marketCapDeltaPercent"].abs() +
@@ -60,7 +60,7 @@ def top10_agents_volatile(df):
     )).sort_values(by="volatility_score", ascending=False).head(10).reset_index(drop=True)
     return _msg(out, "volatile", "volatility_score")
 
-def top10_agents_stable(df):
+def top_agents_stable(df) -> str:
     out = df.assign(volatility_score=(
         df["priceDeltaPercent"].abs() +
         df["marketCapDeltaPercent"].abs() +
@@ -68,13 +68,13 @@ def top10_agents_stable(df):
     )).sort_values(by="volatility_score", ascending=True).head(10).reset_index(drop=True)
     return _msg(out, "stable", "volatility_score")
 
-def top10_agents_undervalued(df):
+def top_agents_undervalued(df) -> str:
     out = df[df["marketCap"] > 0].assign(undervalue_score=(
         df["averageEngagementsCount"] / df["marketCap"]
     )).sort_values(by="undervalue_score", ascending=False).head(10).reset_index(drop=True)
     return _msg(out, "undervalued", "undervalue_score")
 
-def top10_agents_newly_active(df):
+def top_agents_newly_active(df) -> str:
     out = df[
         (df["holdersCountDeltaPercent"] > 10) & 
         (df["volume24HoursDeltaPercent"] > 10)
@@ -82,8 +82,7 @@ def top10_agents_newly_active(df):
     return _msg(out, "newly active", "holdersCountDeltaPercent")
 
 # =============================================================================
-
-def xtreamly_volatility():
+def xtreamly_volatility() -> str:
     threshold = 0.003897
     symbol = "ETH"  # Change this to any token symbol
     horizon = "60min"  # Options: "1min", "60min", etc.
@@ -93,7 +92,7 @@ def xtreamly_volatility():
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raises an error for bad responses (4xx and 5xx)
         data = response.json()
-        state = 'low' if data['volatility'] <= 0.003897 else 'high'
+        state = 'low' if data['volatility'] <= threshold else 'high'
         return state
     except requests.exceptions.RequestException as e:
         return f"Error fetching volatility prediction: {e}"
