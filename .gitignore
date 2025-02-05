@@ -175,3 +175,9 @@ xtreamly-ai.json
 run_ai.py
 run_gcp.py
 run_guidebook.py
+
+keys/
+# gaia
+gaia/model
+gaia/node
+nohup.out

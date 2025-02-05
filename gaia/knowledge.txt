@@ -1,0 +1,58 @@
+What is looping or loop trading?
+The origin of looping
+We don’t know exactly who’s been the first looper, but we know for sure that $COMP farming in mid 2020 made this strategy pretty popular. But some users apparently looped even before, as soon as MakerDAO went live in 2017, to long ETH natively on-chain.
+
+So DeFi users have been looping for more than 6 years!
+
+And nowadays pretty much everyone is levering up on Aave, Morpho, Spark. For instance, Morpho claims 64% of their volumes comes from users performing looping strategies. That’s why Contango chose to build futures (expirables first, and now perps) using money markets: it’s the DeFi native way of longing and shorting on-chain.
+
+In a nutshell, looping involves lending or depositing some capital (e.g. ETH into a MakerDAO vault or on Aave), borrowing another currency (e.g. DAI) against it, swapping the borrowed amount for the original asset (ETH), and repeating the steps through several loops to gain more exposure to the initial asset — or simply to farm more rewards.
+
+Money markets normally require you to be overcollateralized, meaning that you can only borrow less than the value of what you deposit. For instance, ETH on Aave has a maximum loan-to-value (LTV) ratio of 82.5% meaning that you can only borrow 82.5% of the $ value of the ETH you’ve deposited.
+
+That’s why, after 12–15 loops normally you get diminishing returns on the effort you’re putting into looping: the exposure you get to the asset you’re lending increases by smaller and smaller amounts (kudos to Stephen from Defi Dojo for his brilliant explainer and calculator).
+
+Let’s see an example on Aave, with spot ETH = 1000 DAI, and max LTV = 82.5%.
+
+1st loop:
+
+Deposit 1 ETH
+Borrow 825 DAI
+Swap 825 DAI for 0.825 ETH
+Lend 0.825 ETH
+2nd loop:
+
+Borrow 681 DAI
+Swap 681 DAI for 0.681 ETH
+Lend 0.681 ETH
+[…]
+
+14th loop:
+
+Borrow 56 DAI
+Swap 56 DAI for 0.056 ETH
+Lend 0.056 ETH
+15th loop:
+
+Borrow 46 DAI
+Swap 46 DAI for 0.046 ETH
+Lend 0.046 ETH
+As you can see, at the 15th loop, the total net ETH exposure (which is already around 5.45 ETH) doesn’t increase by that much anymore (just 0.046 ETH, not even 1%). And gas fees might make the following loop not worth it.
+
+Indeed, manual looping is pretty expensive, especially on L1.
+
+That’s why automated strategies were developed.
+
+This is the knowledge you got about prediction of volatility in the crypto market for ETH/USDT.
+prediction_time,status_description
+2025-01-29 14:18:21.378678 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:23:05.065694 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:20:44.270270 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:24:14.759304 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:25:22.579617 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:21:54.072328 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:19:34.144901 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:44:19.278207 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+2025-01-29 14:43:08.007339 UTC,"ETH price in moderate price fluctuations, requiring calibrated risk-taking and strategic adjustments."
+
+

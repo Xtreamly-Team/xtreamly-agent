@@ -8,7 +8,24 @@ llm_config={
     "timeout": 120,
     }
 
-agent_planner = autogen.ConversableAgent(
+class LoggingConversableAgent(autogen.ConversableAgent):
+    def receive(
+        self,
+        message,
+        sender,
+        request_reply = None,
+        silent = False,
+    ):
+        # Log the message before passing it along
+        print("+-+"*50)
+        print("message:", message['content'])
+        print("agent:", message['name'])
+        print("+-+"*50)
+
+        # Continue normal execution
+        return super().receive(message, sender, request_reply, silent)
+
+agent_planner = LoggingConversableAgent(
         name="Planner",
         system_message = """
         # You are the Planner to progress of the task from human and discuss only about agents from Cookie DAO to invest in.
@@ -32,7 +49,7 @@ agent_planner = autogen.ConversableAgent(
         human_input_mode="NEVER",
     )
 
-agent_researcher = autogen.ConversableAgent(
+agent_researcher = LoggingConversableAgent(
         name=f"Researcher",
         system_message="""
         # You are the Researcher collecting information on agents from Cookie DAO.
@@ -51,7 +68,7 @@ agent_researcher = autogen.ConversableAgent(
         human_input_mode="NEVER",
         )
 
-executor = autogen.ConversableAgent(
+executor = LoggingConversableAgent(
         name=f"tool_executor",
         llm_config=False,
         is_termination_msg=lambda msg: msg.get("content") is not None and "TERMINATE" in msg["content"],
@@ -59,7 +76,7 @@ executor = autogen.ConversableAgent(
         human_input_mode="NEVER",
     )
 
-human_proxy = autogen.ConversableAgent(
+human_proxy = LoggingConversableAgent(
     "human_proxy",
     llm_config=False,  # no LLM used for human proxy
     human_input_mode="ALWAYS",  # always ask for human input
