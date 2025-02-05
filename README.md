@@ -99,3 +99,7 @@ Follow these steps to set up your development environment using Anaconda:
    ```
 
 Your Anaconda environment is now set up, and you can proceed to run or develop the application.
+
+## Knowledge
+
+- https://www.youtube.com/watch?v=dW-qr_ntOgc&t=173s
