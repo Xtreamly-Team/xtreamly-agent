@@ -6,7 +6,7 @@ import warnings
 warnings.filterwarnings("ignore")
 from pydantic import BaseModel
 
-from run_cookiedao import load_data_cookiedao
+from cookiedao.run_cookiedao import load_data_cookiedao
 from agent.agents import AutogenChat
 from agent.ui_pusher import create_chat
 
