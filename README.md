@@ -31,7 +31,7 @@
 1. Start the development server:
 
    ```bash
-   python app.py
+   python main.py
    ```
 
    By default, the server runs on port `8080`. This can be customized using the `PORT` environment variable.

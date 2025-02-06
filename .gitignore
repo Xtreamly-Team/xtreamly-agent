@@ -181,3 +181,6 @@ keys/
 gaia/model
 gaia/node
 nohup.out
+
+keys/
+xtreamly-firebase.json

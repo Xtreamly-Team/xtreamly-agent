@@ -1,5 +1,5 @@
 fastapi==0.112.2
-uvicorn==0.30.6
+uvicorn[standard]
 google==3.0.0
 google-api-core==2.8.1
 google-auth==2.6.6

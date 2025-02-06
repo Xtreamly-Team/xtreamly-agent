@@ -1,15 +1,15 @@
 from uvicorn import run
-from fastapi import FastAPI, Query, Body, BackgroundTasks, HTTPException, File, UploadFile, Depends  # , Depends, Body
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi import FastAPI  # , Depends, Body
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
 import os
 import warnings
 warnings.filterwarnings("ignore")
-# from auth import _current_user
+from pydantic import BaseModel
 
 from run_cookiedao import load_data_cookiedao
-from run_agents import _conversation
+from codes_ai.agents import AutogenChat
+from codes_ai.ui_pusher import create_chat
+
 
 app = FastAPI(
     title="AI Cookie DAO",
@@ -36,7 +36,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -50,12 +50,57 @@ def load():
     load_data_cookiedao()
     return "Loaded Cookie DAO data into BQ"
 
-@app.post("/Conversation")
-def talk(
-    msg: str = Query("Find me most interesting agents to invest in"),
-    ):  
-    return _conversation(msg)
+
+class HumanInput(BaseModel):
+    chatId: str
+    msg: str
+
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: list[AutogenChat] = []
+
+    def get_agent(self, chat_id):
+        return [
+            a
+            for a in self.active_connections
+            if a.chat_id == chat_id
+        ][0]
+
+    async def connect(self, autogen_chat: AutogenChat):
+        self.active_connections.append(autogen_chat)
+
+
+manager = ConnectionManager()
+
+
+@app.get("/init_chat")
+async def init_chat():
+    chat_id = create_chat()
+    autogen_chat = AutogenChat(chat_id=chat_id)
+    await manager.connect(autogen_chat)
+    return {
+        "chatId": autogen_chat.chat_id,
+    }
+
+
+@app.get("/init_agent")
+async def init_agent(
+    chatId: str,
+):
+    agent = manager.get_agent(chatId)
+    await agent.start("test")
+    return {}
+
+
+@app.post("/conversation")
+async def talk(
+    input_data: HumanInput,
+):
+    agent = manager.get_agent(input_data.chatId)
+    agent.websocket.put_nowait(input_data.msg)
+    return "ok"
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 8080))
+    port = int(os.environ.get('PORT', 8000))
     run(app, host="0.0.0.0", port=port)
