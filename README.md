@@ -16,9 +16,7 @@ Read more about how our agents operate here: [Agent Policy](cookiedao%2Fpolicy.m
 1. Nvm installed on the machine, or Node version v20.18.0 (inside the .nvmrc file)
 2. Python 3.10.14
 
-## Local setup
-
-## 🛠 Installation
+## 🛠 Local setup
 
 1. Clone this repository:
 
