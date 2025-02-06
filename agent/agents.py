@@ -1,6 +1,6 @@
 import autogen
-from codes_ai.run_agents import *
-from codes_ai.xtreamly_conversable_agent import XtreamlyConversableAgent
+from agent.run_agents import *
+from agent.xtreamly_conversable_agent import XtreamlyConversableAgent
 import asyncio
 
 llm_config = {

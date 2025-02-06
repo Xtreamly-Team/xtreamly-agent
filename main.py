@@ -7,8 +7,8 @@ warnings.filterwarnings("ignore")
 from pydantic import BaseModel
 
 from run_cookiedao import load_data_cookiedao
-from codes_ai.agents import AutogenChat
-from codes_ai.ui_pusher import create_chat
+from agent.agents import AutogenChat
+from agent.ui_pusher import create_chat
 
 
 app = FastAPI(

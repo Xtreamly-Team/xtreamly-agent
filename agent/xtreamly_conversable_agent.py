@@ -1,5 +1,5 @@
 import autogen
-from codes_ai.ui_pusher import push_message
+from agent.ui_pusher import push_message
 
 
 class XtreamlyConversableAgent(autogen.ConversableAgent):

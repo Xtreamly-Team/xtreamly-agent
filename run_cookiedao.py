@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 
 from google.cloud import storage, bigquery  # , pubsub_v1
 from google.oauth2 import service_account
-from codes_ai.cookiedao_load import *
+from agent.cookiedao_load import *
 
 auth_file = os.path.join(f'xtreamly-ai.json')
 credentials = None

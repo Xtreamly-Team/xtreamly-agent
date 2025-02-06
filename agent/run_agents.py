@@ -23,8 +23,8 @@ warnings.filterwarnings("ignore")
 
 from google.cloud import storage, bigquery  # , pubsub_v1
 from google.oauth2 import service_account
-from codes_ai.cookiedao_tools import *
-from codes_ai.agents import *
+from agent.cookiedao_tools import *
+from agent.agents import *
 
 auth_file = os.path.join(f'xtreamly-ai.json')
 credentials = None
