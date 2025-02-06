@@ -9,22 +9,11 @@ import os
 import sys
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
 sys.path.insert(0, parent_dir)
-from gcp.func import client_bq
 import requests
 import numpy as np
 import pandas as pd
 import math
 import time
-import matplotlib.pyplot as plt
-import seaborn as sns
-import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
-import matplotlib.cbook as cbook
-import matplotlib.image as image
-import matplotlib.ticker as mtick
-import matplotlib.dates as mdates
-import matplotlib.colors as mcolors
-import matplotlib.ticker as ticker
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm, to_hex, LinearSegmentedColormap, Normalize
 import pytz
 import json
@@ -33,6 +22,7 @@ from datetime import datetime, timedelta
 from pprint import pprint
 from dotenv import load_dotenv
 
+# from gcp.func import client_bq
 # from gcp.func import *
 # from settings.plot import tailwind, _style, _style_black, _style_white
 # folder = 'plot_cookiedao'
@@ -55,15 +45,6 @@ def get_agents(page):
     res = res.json()["ok"]
     return res["data"], res["currentPage"] == res["totalPages"]
 
-Agents = []
-page = 1
-done = False
-while not done:
-    agents, done = get_agents(page)
-    Agents += agents
-    print("Ingested page", page)    
-    page += 1
-    time.sleep(.5)
 def agent_record(a):
     return {
         "agentName": a["agentName"],
@@ -87,52 +68,74 @@ def agent_record(a):
         "contracts": json.dumps(a["contracts"]),
         "twitterUsernames": ",".join(a["twitterUsernames"]),
     }   
-df_agents = pd.DataFrame([agent_record(a) for a in Agents])
 
-Tweets = []
-for a in Agents[:]: 
-    if len(a['topTweets']):
-        df_t = pd.DataFrame(a['topTweets'])
-        df_t['agentName'] = a['agentName']
-        Tweets += [df_t]
-df_tweets = pd.concat(Tweets) 
+def get_data_cookiedao():
 
-Contracts = []
-for a in Agents[:]: 
-    if len(a['contracts']):
-        df_c = pd.DataFrame(a['contracts'])
-        df_c['agentName'] = a['agentName']
-        Contracts += [df_c]
-df_contracts = pd.concat(Contracts) 
+    Agents = []
+    page = 1
+    done = False
+    while not done:
+        agents, done = get_agents(page)
+        Agents += agents
+        # print("Ingested page", page)    
+        page += 1
+        time.sleep(.5)
+    
+    df_agents = pd.DataFrame([agent_record(a) for a in Agents])
+    
+    Tweets = []
+    for a in Agents[:]: 
+        if len(a['topTweets']):
+            df_t = pd.DataFrame(a['topTweets'])
+            df_t['agentName'] = a['agentName']
+            Tweets += [df_t]
+    df_tweets = pd.concat(Tweets) 
+    
+    Contracts = []
+    for a in Agents[:]: 
+        if len(a['contracts']):
+            df_c = pd.DataFrame(a['contracts'])
+            df_c['agentName'] = a['agentName']
+            Contracts += [df_c]
+    df_contracts = pd.concat(Contracts)
+    
+
+    return df_agents, df_tweets, df_contracts
+
+
+# def load_data_cookiedao():
+#     df_agents, df_tweets, df_contracts = get_data_cookiedao()
+
+
+
 
 # =============================================================================
 # Time
-_time = datetime.utcnow().replace(tzinfo=pytz.utc).strftime("%Y-%m-%d %H:%M:%S")
-df_agents['_time'] = _time
-df_tweets['_time'] = _time
-df_contracts['_time'] = _time
+
 
 # =============================================================================
-# Upload BQ
-auth_file = os.path.join('..', 'gcp', f'xtreamly-ai-cc418ba37b0c.json')
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = auth_file
-from google.cloud import bigquery
-
-tbl_agents = f"xtreamly-ai.xtreamly_cookiedao.agents"
-tbl_tweets = f"xtreamly-ai.xtreamly_cookiedao.tweets"
-tbl_contracts = f"xtreamly-ai.xtreamly_cookiedao.contracts"
-
-def _convert(df):
-    for c,t in zip(df.columns, df.dtypes):
-        if c == "_time":  df["_time"] = pd.to_datetime(df["_time"])
-        elif str(t) == "object": df[c] = df[c].astype(str)
-        elif str(t) == "float64": df[c] = df[c].astype("Float64")
-        elif str(t) == "int64": df[c] = df[c].astype("Int64")
-        else: 0
-    return df
-job = client_bq.load_table_from_dataframe(_convert(df_agents), tbl_agents)
-job = client_bq.load_table_from_dataframe(_convert(df_tweets), tbl_tweets)
-job = client_bq.load_table_from_dataframe(_convert(df_contracts), tbl_contracts)
+# # =============================================================================
+# # Upload BQ
+# auth_file = os.path.join('..', 'gcp', f'xtreamly-ai-cc418ba37b0c.json')
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = auth_file
+# from google.cloud import bigquery
+# 
+# tbl_agents = f"xtreamly-ai.xtreamly_cookiedao.agents"
+# tbl_tweets = f"xtreamly-ai.xtreamly_cookiedao.tweets"
+# tbl_contracts = f"xtreamly-ai.xtreamly_cookiedao.contracts"
+# 
+# def _convert(df):
+#     for c,t in zip(df.columns, df.dtypes):
+#         if c == "_time":  df["_time"] = pd.to_datetime(df["_time"])
+#         elif str(t) == "object": df[c] = df[c].astype(str)
+#         elif str(t) == "float64": df[c] = df[c].astype("Float64")
+#         elif str(t) == "int64": df[c] = df[c].astype("Int64")
+#         else: 0
+#     return df
+# job = client_bq.load_table_from_dataframe(_convert(df_agents), tbl_agents)
+# job = client_bq.load_table_from_dataframe(_convert(df_tweets), tbl_tweets)
+# job = client_bq.load_table_from_dataframe(_convert(df_contracts), tbl_contracts)
+# =============================================================================
 
 
 # =============================================================================
