@@ -1,0 +1,19 @@
+{
+  "name": "xtreamly-agent",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "ui"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./node_modules ./ui/node_modules ./node_modules",
+    "build": "yarn workspace ui run build",
+    "start": "yarn workspace ui run start"
+  },
+  "dependencies": {
+    "firebase-tools": "^13.13.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,11 @@
+.header {
+ color: white;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ padding: 10px 0;
+ min-height: 70px;
+ //backdrop-filter: blur(10px);
+ margin-bottom: 20px;
+ position: absolute;
+ z-index: 1;
+ width: 100%;
+}

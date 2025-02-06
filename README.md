@@ -9,6 +9,13 @@ This agent leverages Xtreamly's unique volatility predictions and Cookie DAO's m
 
 ![architecture.png](architecture.png)
 
+# Prerequisites
+
+1. Nvm installed on the machine, or Node version v20.18.0 (inside the .nvmrc file)
+2. Python 3.10.14
+
+## Local setup
+
 ## 🛠 Installation
 
 1. Clone this repository:
@@ -18,38 +25,47 @@ This agent leverages Xtreamly's unique volatility predictions and Cookie DAO's m
    ```
 
    ```bash
-   cd <repository-folder>
+   cd xtreamly-agent
    ```
 
-   And checkout to agenting branch:
-
-   ```bash
-   git checkout autogen
-   ```
-
-2. Install the required dependencies:
+2. Install the required python dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Optional: Configure environment variables in a `.env` file (if needed for additional customizations).
+3. Install the required node dependencies:
 
-## 🚀 Usage
+   ```bash
+   nvm use
+   ```
+   ```bash
+   npm install -g yarn
+   ```
+   ```bash
+   yarn
+   ```
 
-1. Start the development server:
+4. Optional: Configure environment variables in a `.env` file (if needed for additional customizations).
+
+## 🚀 Run Locally
+
+1. Start the backend agent server:
 
    ```bash
    python main.py
    ```
 
-   By default, the server runs on port `8080`. This can be customized using the `PORT` environment variable.
+   By default, the server runs on port `8000`. This can be customized using the `PORT` environment variable.
 
-2. Access the API in your browser or API testing tool at:
+   Visit API: http://localhost:8000
 
+
+2. Start the frontend (on another tab):
+   ```bash
+   yarn start
    ```
-   http://localhost:8080
-   ```
+   Visit ui: http://localhost:5173/
 
 ## ⚙️ Configuration
 
@@ -58,50 +74,9 @@ This agent leverages Xtreamly's unique volatility predictions and Cookie DAO's m
   - OPENAI_API_KEY
   - FIRECRAWL_API_KEY
   - COOKIE_DAO_API
+  - Firebase service account creds file: `./xtreamly-firebase.json`
 
-## 💻 Set Up Environment with Anaconda
-
-Follow these steps to set up your development environment using Anaconda:
-
-1. **Check Existing Environments**
-
-   ```bash
-   conda env list
-   ```
-
-2. **Create a New Environment**
-
-   Create a new environment with Python 3.11.3:
-
-   ```bash
-   conda create -n xtreamly-agent python=3.11.3
-   ```
-
-3. **Activate the Environment**
-
-   ```bash
-   conda activate xtreamly-agent
-   ```
-
-4. **Install Dependencies**
-
-   Use `pip` to install the dependencies listed in the `requirements.txt` file:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-5. **Install Spyder Kernels (Optional)**
-
-   If you are using Spyder IDE, install the required version of Spyder kernels:
-
-   ```bash
-   conda install spyder-kernels==2.4.4
-   ```
-
-6. **Build Docker Image**
-
-   Build a Docker image for the application:
+## 💻 Build Docker Image
 
    ```bash
    docker build -t fastapi .

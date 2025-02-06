@@ -1,0 +1,12 @@
+.chat {
+  height: calc(100vh - 180px);
+
+  .messages {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1; /* Take available space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column-reverse; /* Items grow from bottom to top */
+  }
+}

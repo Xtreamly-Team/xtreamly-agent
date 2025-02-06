@@ -3,7 +3,7 @@ from datetime import datetime
 from firebase_admin import credentials, firestore
 
 
-cred = credentials.Certificate("./keys/xtreamly-firebase.json")
+cred = credentials.Certificate("./xtreamly-firebase.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
