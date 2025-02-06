@@ -1,4 +1,13 @@
-# Startup ideas & verify backend 🚀
+# Xtreamly Agent
+
+Welcome to the Xtreamly AI Agent.
+The first super intelligent automated trading DeFi Agent.
+
+This agent leverages Xtreamly's unique volatility predictions and Cookie DAO's market sentiment analysis to perform high yielding trading strategies.
+
+## Architecture
+
+![architecture.png](architecture.png)
 
 ## 🛠 Installation
 
