@@ -4,7 +4,7 @@ import '@mantine/core/styles.css'
 // import '@mantine/dates/styles.css'
 import '@mantine/notifications/styles.css'
 // import '@mantine/dropzone/styles.css';
-// import '@mantine/charts/styles.css';
+import '@mantine/charts/styles.css';
 import {generateColors} from '@mantine/colors-generator'
 
 import {createTheme, Loader} from "@mantine/core";

@@ -3,6 +3,7 @@ import {AspectRatio, Box, Stack, Text, Title, Tooltip} from "@mantine/core";
 import {useEffect, useState} from "react";
 import {useAgent} from "../data-access/agent";
 import Markdown from "react-markdown";
+import CurrentVolatilitySimple from "../components/CurrentVolatilitySimple";
 
 function Thought({
     text,
@@ -92,9 +93,10 @@ function Agent() {
                         top: 0,
                     }}
                 >
-                {
-                    getLatestMessages(messages).map((m, i) => <Thought key={i} text={m.message} agent={m.agent}/>)
-                }
+                    <CurrentVolatilitySimple/>
+                    {
+                        getLatestMessages(messages).map((m, i) => <Thought key={i} text={m.message} agent={m.agent}/>)
+                    }
                 </Box>
             </AspectRatio>
             {chatId && <ChatPage chatId={chatId} messages={messages} loading={loading}/> }

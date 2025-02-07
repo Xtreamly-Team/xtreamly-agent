@@ -21,7 +21,7 @@ export const AGENTS: any = {
     "human_proxy": {
         title: "You",
         x: "38.5%",
-        y: "20%",
+        y: "12%",
         noArrow: true,
         size: "md"
     },
