@@ -3,7 +3,7 @@ import LoadingDots from "../components/chat/loadingDots";
 import {useState} from "react";
 import {Avatar, Box, Button, Group, Stack, Text, Title} from "@mantine/core";
 import Markdown from "react-markdown";
-import {post} from "../services/api";
+import {post} from "../utils/api";
 
 export const AGENTS: any = {
     "Researcher": {

@@ -1,6 +1,6 @@
 import {subscribeTo} from "../utils/firestore";
 import {useQuery} from "@tanstack/react-query";
-import {get} from "../services/api.ts";
+import {get} from "../utils/api";
 
 function subscribes(chatId: string, onUpdate: (messages: any[]) => void) {
     console.log(`chats/${chatId}/messages`);
