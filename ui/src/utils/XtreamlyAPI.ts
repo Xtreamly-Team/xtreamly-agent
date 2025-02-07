@@ -9,8 +9,7 @@ export class XtreamlyAPI {
   private baseUrl: string
 
   constructor() {
-    // this.baseUrl = "https://api.xtreamly.io/";
-    this.baseUrl = "http://localhost:8000/";
+    this.baseUrl = "https://api.xtreamly.io/";
   }
 
   async get(path: XtreamlyAPIPath, params?: Record<string, any>): Promise<any> {
