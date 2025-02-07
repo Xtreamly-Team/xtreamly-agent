@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/path';
+const API_URL = 'https://xtreamly-agent-664616721985.us-central1.run.app/path';
 
 function getUrl(path: string, params: any = {}) {
     const url = new URL(`${API_URL.replace("path", path)}`)

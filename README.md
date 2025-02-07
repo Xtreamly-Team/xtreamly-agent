@@ -5,7 +5,7 @@ The first super intelligent automated trading DeFi Agent.
 
 This agent leverages Xtreamly's unique volatility predictions and Cookie DAO's market sentiment analysis to perform high yielding trading strategies.
 
-Read more about how our agents operate here: [Agent Policy](cookiedao%2Fpolicy.md)
+Read more about how our agents operate here: [Agent Policy](agent%2Fpolicy.md)
 
 ## Architecture
 
