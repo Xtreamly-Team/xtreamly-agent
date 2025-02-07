@@ -102,17 +102,6 @@ def get_data_cookiedao():
 
     return df_agents, df_tweets, df_contracts
 
-
-# def load_data_cookiedao():
-#     df_agents, df_tweets, df_contracts = get_data_cookiedao()
-
-
-
-
-# =============================================================================
-# Time
-
-
 # =============================================================================
 # # =============================================================================
 # # Upload BQ

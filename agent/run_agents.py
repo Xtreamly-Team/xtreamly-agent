@@ -62,8 +62,8 @@ def load_agents():
     """
     df_agents = client_bq.query(sql_agents).result().to_dataframe()
     df = df_agents.copy()
-    #df = df[(df["marketCap"] > 10e5) & (df["volume24Hours"] > 0) & (df["holdersCount"] > 0)]
-    df = df[df['agentName'].isin(df_arbitrum['agentName'])]
+    df = df[(df["marketCap"] > 10e5) & (df["volume24Hours"] > 0) & (df["holdersCount"] > 0)]
+    # df = df[df['agentName'].isin(df_arbitrum['agentName'])]
     return df
 
 def invest(
