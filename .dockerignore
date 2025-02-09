@@ -17,7 +17,7 @@ obj/  # Object files
 *.lock
 *.sqlite
 *.db
-xtreamly-ai.json
+#xtreamly-ai.json
 
 
 # Ignore temporary files and system files
@@ -47,7 +47,7 @@ build/
 .cache/
 coverage/
 
-.env
+#.env
 ui/
 collabland/
 gaia/
