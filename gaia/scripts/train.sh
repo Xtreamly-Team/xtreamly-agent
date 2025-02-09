@@ -18,7 +18,7 @@ curl -L -o $DIR/paragraph_embed.wasm https://github.com/GaiaNet-AI/embedding-too
 
 wasmedge --dir .:. \
   --nn-preload embedding:GGML:AUTO:$DIR/nomic-embed-text-v1.5.f16.gguf \
-  $DIR/paragraph_embed.wasm embedding default 768 knowledge.txt -c 32768
+  $DIR/paragraph_embed.wasm embedding default 768 knowledge.txt -c 8192
 
 response=$(curl -X POST 'http://localhost:6333/collections/default/snapshots')
 snapshot_name=$(echo "$response" | jq -r '.result.name')

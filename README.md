@@ -69,6 +69,9 @@ Read more about how our agents operate here: [Agent Policy](documentation%2FProj
    ```
    Visit ui: http://localhost:5173/
 
+
+3. Setting up Gaia visit: [README.md](gaia%2FREADME.md)
+
 ## ⚙️ Configuration
 
 - **CORS Middleware:** Configured to allow specific origins (e.g., `localhost` on common development ports).

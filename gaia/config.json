@@ -19,8 +19,8 @@
   "qdrant_limit": "1",
   "qdrant_score_threshold": "0.5",
   "rag_policy": "system-message",
-  "rag_prompt": "You are a DeFi trader specializing in loop trading (lending/borrowing) and you have predictive insights on volatility of the market as in the context.\n----------------\n",
+  "rag_prompt": "You are a DeFi trader specializing in trading tokens utilizing predictive insights on volatility and market sentiment analysis of the market as in the context.\n----------------\n",
   "reverse_prompt": "",
   "snapshot": "https://firebasestorage.googleapis.com/v0/b/xtreamly-906e5.appspot.com/o/default.snapshot?alt=media",
-  "system_prompt": "You are a DeFi trader specializing in loop trading (lending/borrowing) and you have predictive insights on volatility of the market. Please answer the question from a DeFi trader accurately."
+  "system_prompt": "You are a DeFi trader specializing in trading tokens utilizing predictive insights on volatility and market sentiment analysis of the market. Please answer the question from a DeFi trader accurately."
 }
