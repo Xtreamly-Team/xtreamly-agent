@@ -81,8 +81,14 @@ Read more about how our agents operate here: [Agent Policy](documentation%2FProj
 ## 💻 Build Docker Image
 
    ```bash
-   docker build -t fastapi .
+   docker build -t xtreamly-agent .
    ```
+### Push docker image to docker hub:
+
+```bash
+docker tag xtreamly-agent xtreamly/xtreamly-agent:latest
+docker push xtreamly/xtreamly-agent:latest
+```
 
 Your Anaconda environment is now set up, and you can proceed to run or develop the application.
 

@@ -99,7 +99,9 @@ async def talk(
 ):
     agent = manager.get_agent(input_data.chatId)
     agent.websocket.put_nowait(input_data.msg)
-    return "ok"
+    return {
+        "msg": "xtreamly agent triggered"
+    }
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8000))

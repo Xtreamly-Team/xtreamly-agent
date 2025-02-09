@@ -1,0 +1,57 @@
+# Ignore all node_modules (for Node.js projects)
+node_modules/
+
+# Ignore Python virtual environments
+venv/
+__pycache__/
+
+# Ignore dependency directories (common for different languages)
+target/  # Maven/Gradle
+dist/  # Python build output
+bin/  # Compiled binaries
+obj/  # Object files
+
+# Ignore environment and configuration files
+*.log
+*.pid
+*.lock
+*.sqlite
+*.db
+xtreamly-ai.json
+
+
+# Ignore temporary files and system files
+*.swp
+*.swo
+.DS_Store
+*.tmp
+*.bak
+*.orig
+Thumbs.db
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore Docker-related files (if necessary)
+docker-compose.override.yml
+.dockerignore
+
+# Ignore IDE and Editor Configurations
+.vscode/
+.idea/
+*.iml
+
+# Ignore build and cache files
+build/
+.cache/
+coverage/
+
+.env
+ui/
+collabland/
+gaia/
+documentation/
+settings/
+
+

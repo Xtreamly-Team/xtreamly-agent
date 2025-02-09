@@ -26,10 +26,13 @@ from google.oauth2 import service_account
 from agent.cookiedao_tools import *
 from agent.agents import *
 
-auth_file = os.path.join(f'xtreamly-ai.json')
+credentials_json = os.getenv("GCP_CREDENTIALS")
 credentials = None
-if os.path.isfile(auth_file):
-    credentials = service_account.Credentials.from_service_account_file(auth_file)
+
+if credentials_json:
+    credentials_dict = json.loads(credentials_json)
+    credentials = service_account.Credentials.from_service_account_info(credentials_dict)
+
 client_bigquery = bigquery.Client(credentials=credentials, project="xtreamly-ai")
 client_bq = client_bigquery
 
