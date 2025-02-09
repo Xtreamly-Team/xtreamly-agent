@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from agent.run_cookiedao import load_data_cookiedao
 from agent.agents import AutogenChat
 from agent.ui_pusher import create_chat
+from agent.run_agents import load_agents
 
 
 app = FastAPI(
@@ -79,6 +80,7 @@ async def init_chat():
     chat_id = create_chat()
     autogen_chat = AutogenChat(chat_id=chat_id)
     await manager.connect(autogen_chat)
+    load_agents()
     return {
         "chatId": autogen_chat.chat_id,
     }

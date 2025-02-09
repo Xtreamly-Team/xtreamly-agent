@@ -46,7 +46,7 @@ export default function CurrentVolatilitySimple() {
     }
 
     const vol = VOL_MAP[currentVolatility.classification];
-    let data = historicalVolatility?.map(mapToBars) || []
+    let data = historicalVolatility ? historicalVolatility.map(mapToBars) : []
     data = [
         {
             date: "",
