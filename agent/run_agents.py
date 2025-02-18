@@ -164,7 +164,10 @@ def xtreamly_volatility() -> str:
     symbol = "ETH"  # Change this to any token symbol
     horizon = "60min"  # Options: "1min", "60min", etc.
     url = f"https://api.xtreamly.io/volatility_prediction?symbol={symbol}&horizon={horizon}"
-    headers = {"accept": "application/json"}
+    headers = {
+        "accept": "application/json",
+        "x-api-key": os.environ.get("XTREAMLY_API"),
+    }
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raises an error for bad responses (4xx and 5xx)
