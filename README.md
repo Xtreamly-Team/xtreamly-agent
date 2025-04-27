@@ -1,4 +1,4 @@
-# Xtreamly Agent
+# Xtreamly meme coin trader Agent
 
 Welcome to the Xtreamly AI Agent.
 The first super intelligent automated trading DeFi Agent.
